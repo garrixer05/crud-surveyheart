@@ -11,3 +11,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.loading {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: var(--clr-white);
+  width: 80vw;
+  max-width: 400px;
+  border-radius: var(--radius);
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.heading{
+  font-weight: 500;
+}
+.App{
+  height: 100vh;
+  overflow-y: hidden;
+}
+.lis{
+  list-style: none;
+  text-align: center;
+  /* cursor: pointer; */
+  transition: ease 0.3s ;
+  background: #fff7ff;
+}
+
+.e_btn{
+  transition: ease-in 0.2s;
+}
+.e_btn:hover{
+  background: black;
+}
+.status_c{
+  margin: 0 20px;
+  color: green;
+}
+.status_p{
+  margin: 0 20px;
+  color: orange;
+}
+.no_task{
+  text-align: center;
+  color: burlywood;
+}
