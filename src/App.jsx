@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Todos from "./components/Todos";
 import { useEffect } from "react";
-import { getTodos, setLoading } from "./feature/todoSlice";
+import { getTodos } from "./feature/todoSlice";
 import Modal from "./components/Modal";
 import Loader from "./components/Loader";
 
@@ -10,16 +10,11 @@ function App() {
   const { isOpen } = useSelector((store) => store.modal);
   const dispatch = useDispatch();
   useEffect(() => {
-    // dispatch(setLoading());
     dispatch(getTodos());
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
-    return (
-      <div className="loading">
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
   return (
     <div className="App">

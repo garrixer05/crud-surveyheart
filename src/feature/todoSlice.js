@@ -3,9 +3,9 @@ import axios from "axios";
 export const getTodos = createAsyncThunk(
   "todo/getTodos",
   async (payload, thunkAPI) => {
+    thunkAPI.dispatch(setLoading(true));
     try {
       const response = await axios.get("https://dummyjson.com/todos?limit=3");
-      // console.log(response.data.todos);
       return response.data.todos;
     } catch (error) {
       console.log(error);
@@ -45,7 +45,6 @@ export const editTodo = createAsyncThunk(
 export const addTodo = createAsyncThunk(
   "todo/addTodo",
   async (todo, thunkAPI) => {
-    console.log(todo);
     thunkAPI.dispatch(setLoading());
     try {
       const response = await axios.post(
@@ -69,8 +68,12 @@ export const todoSlice = createSlice({
   name: "todo",
   initialState: initialState,
   reducers: {
-    setLoading: (state) => {
-      state.isLoading = !state.isLoading;
+    setLoading: (state, action) => {
+      if (action.payload) {
+        state.isLoading = true;
+      } else {
+        state.isLoading = !state.isLoading;
+      }
     },
   },
   extraReducers: (builder) => {

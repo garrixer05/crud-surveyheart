@@ -13,7 +13,7 @@ code {
 }
 .loading {
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 20%;
 }
 
 .modal-container {
@@ -47,9 +47,10 @@ code {
 .lis{
   list-style: none;
   text-align: center;
-  /* cursor: pointer; */
-  transition: ease 0.3s ;
   background: #fff7ff;
+}
+.list_item{
+  text-decoration:line-through;
 }
 
 .e_btn{

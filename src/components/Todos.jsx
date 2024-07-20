@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, deleteTodo, setLoading } from "../feature/todoSlice";
+import { addTodo, deleteTodo } from "../feature/todoSlice";
 import { setTodo, toggleModal } from "../feature/modalSlice";
 import {
   Box,
@@ -15,10 +15,14 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import Loader from "./Loader";
+import { v4 as uuidv4 } from "uuid";
 
 const Todos = () => {
   const [inputTodo, setInputTodo] = useState("");
   const { todos } = useSelector((store) => store.todo);
+  const { isLoading } = useSelector((store) => store.modal);
+
   const dispatch = useDispatch();
 
   const handleAddTodo = () => {
@@ -33,6 +37,10 @@ const Todos = () => {
       })
     );
   };
+  if (isLoading) {
+    console.log(isLoading);
+    return <Loader />;
+  }
   return (
     <Paper
       elevation={20}
@@ -90,7 +98,7 @@ const Todos = () => {
           {todos.length > 0 ? (
             todos.map((todo) => {
               return (
-                <Paper key={todo + 5} elevation={14} sx={{ marginY: "5px" }}>
+                <Paper key={uuidv4()} elevation={14} sx={{ marginY: "5px" }}>
                   <ListItem className="lis" key={todo.id}>
                     {todo.completed ? (
                       <div className="status_c">
@@ -102,13 +110,14 @@ const Todos = () => {
                       </div>
                     )}
                     <ListItemText
-                      key={todo.id + 1}
-                      sx={todo.completed && { textDecoration: "line-through" }}
+                      key={uuidv4()}
+                      className={`${todo.completed && "list_item"}`}
+                      // sx={todo.completed && { textDecoration: "line-through" }}
                     >
-                      {todo.todo}{" "}
+                      {todo.todo}
                     </ListItemText>
                     <IconButton
-                      key={todo.id + 2}
+                      key={uuidv4()}
                       onClick={() => {
                         dispatch(toggleModal());
                         dispatch(setTodo(todo));
@@ -117,7 +126,7 @@ const Todos = () => {
                       <EditIcon />
                     </IconButton>
                     <IconButton
-                      key={todo.id + 3}
+                      key={uuidv4()}
                       color="error"
                       onClick={() => dispatch(deleteTodo(todo.id))}
                     >
